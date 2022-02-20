@@ -42,42 +42,55 @@
           je m'inscris
         </button>
       </div>
-      <div class="hero-img">
-        <img src="./bg_img.jpg" alt="img" />
-      </div>
       <button class="btn-signup modal-btn">
         je m'inscris
       </button>
+      <div class="hero-img">
+        <img src="./bg_img.jpg" alt="img" />
+      </div>
     </div>
-
+    
+    <div class="thanks-container">
+      <div class="thanks-content">
+        <div class="thanks-body">
+          <span class="thanks-close"></span>
+          <div class="thanks-text">
+            <p>Merci pour votre inscription</p>
+          </div>
+          <div class="thanks-button">
+            <button class="btn-signup">fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
     <div class="bground">
       <div class="content">
         <span class="close"></span>
         <div class="modal-body">
-          <form id="reserveForm" name="reserve" action="index.html" method="post" onsubmit="return validate();">
-            <div class="formData">
+          <form id="reserveForm" name="reserve" action="index.html" method="get" onsubmit="return validate();">
+            <div class="formData" data-error-visible="false" data-error="veuillez entrer 2 caractères ou plus">
               <label for="first">Prénom</label><br>
-              <input class="text-control" type="text" id="first" name="first" minlength="2" /><br>
+              <input class="text-control" type="text" id="first" name="first"/><br>
             </div>
-            <div class="formData">
+            <div class="formData" data-error-visible="false" data-error="veuillez entrer 2 caractères ou plus">
               <label for="last">Nom</label><br>
               <input class="text-control" type="text" id="last" name="last"/><br>
             </div>
-            <div class="formData">
-              <label>E-mail</label><br>
-              <input class="text-control" type="text" id="email" name="email"/><br>
-              <div class="validEmailText"></div>
+            <div class="formData" data-error-visible="false" data-error="veuillez entrer un email du type : monemail@gmail.com">
+              <label for="email">E-mail</label><br>
+              <input class="text-control" type="email" id="email" name="email"/><br>
             </div>
-            <div class="formData">
-              <label>Date de naissance</label><br>
-              <input class="text-control" type="date" id="birthdate" name="birthdate" /><br>
+            <div class="formData" data-error-visible="false" data-error="veuillez entrer votre date de naissance">
+              <label for="birthdate">Date de naissance</label><br>
+              <input class="text-control" type="date" id="birthdate" name="birthdate"/><br>
             </div>
-            <div class="formData">
-              <label>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
+            <div class="formData" data-error-visible="false" data-error="Veuillez remplir ce champ uniquement avec des chiffres">
+              <label for="quantity">À combien de tournois GameOn avez-vous déjà participé ?</label><br>
               <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99">
             </div>
             <p class="text-label">Quelles villes ?</p>
-            <div class="formData">
+            <div class="formData" data-error-visible="false" data-error="Veuillez choisir une ville">
               <input class="checkbox-input" type="radio" id="location1" name="location" value="New York" />
               <label class="checkbox-label" for="location1">
                 <span class="checkbox-icon"></span>
@@ -103,9 +116,8 @@
                 <span class="checkbox-icon"></span>
                 Portland</label>
             </div>
-
-            <div class="formData">
-              <input class="checkbox-input" type="checkbox" id="checkbox1" checked />
+            <div class="formData" data-error-visible="false" data-error="Veuillez accepter les Conditions gérénales de vente">
+              <input class="checkbox-input" type="checkbox" id="checkbox1" onclick="validCgv()"/>
               <label class="checkbox2-label" for="checkbox1" required>
                 <span class="checkbox-icon"></span>
                 J'ai lu et accepté les conditions d'utilisation.
@@ -114,11 +126,11 @@
               <input class="checkbox-input" type="checkbox" id="checkbox2" />
               <label class="checkbox2-label" for="checkbox2">
                 <span class="checkbox-icon"></span>
-                Je Je souhaite être prévenu des prochains évènements.
+                Je souhaite être prévenu des prochains évènements.
               </label>
               <br>
             </div>
-            <input class="btn-submit" type="submit" class="button" value="C'est parti" />
+            <input class="btn-submit" type="submit" class="button" value="C'est parti"/>
           </form>
         </div>
       </div>

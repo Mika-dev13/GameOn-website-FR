@@ -157,6 +157,18 @@ main {
   font-size: 16px;
 }
 
+.thanks-container {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(26, 39, 156, 0.4);
+}
+
 .bground {
   display: none;
   position: fixed;
@@ -169,7 +181,8 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
-.content {
+.content, 
+.thanks-content {
   margin: 5% auto;
   width: 100%;
   max-width: 500px;
@@ -183,9 +196,21 @@ main {
   padding-top: 10px;
 }
 
-.modal-body {
+.modal-body,
+.thanks-body {
   padding: 15px 8%;
   margin: 15px auto;
+}
+
+.thanks-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+
+.thanks-button > button {
+  margin: 0 auto;
 }
 
 label {
@@ -210,12 +235,12 @@ input {
 }
 .formData[data-error]::after {
   content: attr(data-error);
-  font-size: 0.4em;
+  font-size: 0.5em;
   color: #e54858;
   display: block;
   margin-top: 7px;
   margin-bottom: 7px;
-  text-align: right;
+  text-align: left;
   line-height: 0.3;
   opacity: 0;
   transition: 0.3s;
@@ -296,7 +321,7 @@ input[data-error]::after {
   left: 21%;
   top: 19%;
 }
-.close {
+.close, .thanks-close {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -307,7 +332,9 @@ input[data-error]::after {
   transform: scale(0.7);
 }
 .close:before,
-.close:after {
+.close:after,
+.thanks-close:before,
+.thanks-close:after {
   position: absolute;
   left: 15px;
   content: " ";
@@ -315,17 +342,19 @@ input[data-error]::after {
   width: 3px;
   background-color: #fff;
 }
-.close:before {
+.close:before,
+.thanks-close:before {
   transform: rotate(45deg);
 }
-.close:after {
+.close:after,
+.thanks-close:after {
   transform: rotate(-45deg);
 }
 .btn-submit,
 .btn-signup {
   background: #fe142f;
   display: block;
-  margin: 0 auto;
+  margin: 1rem auto;
   border-radius: 7px;
   font-size: 1rem;
   padding: 12px 82px;
