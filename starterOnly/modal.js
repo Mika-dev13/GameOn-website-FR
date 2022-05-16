@@ -13,48 +13,37 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeModal = document.querySelector(".close");
 const tabLocation = document.forms.reserve.location;
-const closeThanksModal = document.querySelector(".thanks-close");
+const closeThanksModal = document.querySelector(".thanks-button");
 const thanksModal = document.querySelector(".thanks-container");
-
-let form = document.querySelector("#reserveForm");
-
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+const form = document.querySelector("#reserveForm");
 
 // launch modal form
-function launchModal() {
+modalBtn.forEach((btn) => btn.addEventListener("click", () => {
   modalbg.style.display = "block";
-}
+  document.body.classList.add("stop_scrolling")
+}));
 
 //close modal form
-
 closeModal.addEventListener("click", () => {
   modalbg.style.display = "none";
+  document.body.classList.remove("stop_scrolling")
 });
 
 // launch thanks modal
-
 function launchThanksModal() {
   thanksModal.style.display = "block";
-  console.log('test');
+  document.body.classList.add("stop_scrolling")
 };
 
-
 //close thanks modal
-
 closeThanksModal.addEventListener('click', () => {
-  thanksModal.style.display = "none"
-  }
-);
-document.querySelector(".thanks-button").addEventListener("click", () => {
-  thanksModal.style.display = "none"}
-  );
-
+  thanksModal.style.display = "none";
+  document.body.classList.remove("stop_scrolling")
+});
 
 // *************** First name validation ***********
 
 //Ecoute de la modification du first name
-
 form.first.addEventListener("input", function() {
   validFirstName(this);
 });
@@ -70,14 +59,12 @@ const validFirstName = function(inputFirstName) {
   }
 };
 
-
 // *************** Last name validation ***********
 
 //Ecoute de la modification du last name
 form.last.addEventListener('input', function() {
   validLastName(this);
 });
-
 
 const validLastName = function(inputLastName) {
   //Vérification au moins 2 caractères
@@ -89,7 +76,6 @@ const validLastName = function(inputLastName) {
     return true;
   }
 };
-
 
 // *************** Email validation ***********
 
@@ -128,6 +114,7 @@ const validBirthdate = function (inputBirthdate) {
     return true;
   }
 };
+
 //*************** Quantity validation ***********
 
 //Ecoute de la modification de quantity
@@ -150,43 +137,32 @@ const validQuantity = function (inputQuantity) {
 //****************** Radio validation ***************
 
 function validSelectedLocation() {
-  if(Array.from(tabLocation).some(({ checked }) => checked)) {
+  //Récupération du nombre de location
+  let nbLocations = tabLocation.length;
+  //Booléen sélection de location
+  let locationSelection = false;
+  
+  //Récupération des locations proposées dans le tableau
+  if(nbLocations > 0) {
+    //Parcours des locations proposées
+    let i = 0;
+    while(i < nbLocations) {
+      //Test de la location sélectionnée
+      if(tabLocation[i].checked) {
+        locationSelection = true;
+      }
+      i++
+    }
+  }
+  if(!locationSelection) {
+    formData[5].dataset.errorVisible = "true";
+    return false;
+  } else {
     formData[5].dataset.errorVisible = "false";
     return true;
   }
-
-  formData[5].dataset.errorVisible = "true";
-  return false;
+    
 };
-
-
-
-// function validSelectedLocation() {
-//   //Récupération du nombre de location
-//   let nbLocations = tabLocation.length;
-//   //Booléen sélection de location
-//   let locationSelection = false;
-  
-//   //Récupération des location proposés dans le tableau
-//   if(nbLocations > 0) {
-//     //Parcours des locations proposées
-//     let i = 0;
-//     while(i < nbLocations) {
-//       //Test de la location sélectionnée
-//       if(tabLocation[i].checked) {
-//         locationSelection = true;
-//       }
-//       i = i + 1;
-//     }
-//   }
-//   if(!locationSelection) {
-//     formData[5].dataset.errorVisible = "true";
-//     return false;
-//   } else {
-//     formData[5].dataset.errorVisible = "false";
-//   }
-//   return true;
-// };
 
 //************************ Checkbox validation *********************** */
 function validCgv() {
@@ -202,6 +178,7 @@ function validCgv() {
 
 //********************* Validation du formulaire ********************* */
 function validate() {
+  
   if(
     validFirstName(form.first)
     && validLastName(form.last)
@@ -211,12 +188,11 @@ function validate() {
     && validSelectedLocation()
     && validCgv()
   ) {
-    modalbg.style.display = "none";
-    launchThanksModal()
+    return true;
   } 
-  
-  return false;
+    return false; 
 };
 
-// if(location.href.includes('?')) {
-// }
+if(location.href.includes('?')) {
+  launchThanksModal()
+}
